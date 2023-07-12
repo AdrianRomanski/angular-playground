@@ -6,10 +6,16 @@ import { AppComponent } from './app.component';
 import {
     DeveloperGuidesTestingModule
 } from "./websites/angular/developer_guides/testing/app/developer-guides-testing.module";
+import { StructuralDirectivesComponent } from './youtube/decoded_frontend/custom_structural_directives/structural-directives/structural-directives.component';
+import { HideAfterDirective } from './youtube/decoded_frontend/custom_structural_directives/hide-after.directive';
+import { IfLoadedDirective } from './youtube/decoded_frontend/custom_structural_directives/if-loaded.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StructuralDirectivesComponent,
+    HideAfterDirective,
+    IfLoadedDirective
   ],
     imports: [
         BrowserModule,
