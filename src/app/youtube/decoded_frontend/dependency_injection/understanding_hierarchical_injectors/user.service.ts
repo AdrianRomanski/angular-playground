@@ -53,7 +53,7 @@ class Injector {
 // Somewhere in application
 const injector = new Injector([UserService]);
 
-const component = new ComponentTest(injector.get([UserService]));
+const component = new ComponentTest(injector.get(UserService));
 
 component.user.sayHi();
 
@@ -65,7 +65,6 @@ component.user.sayHi();
   selector: 'app-root-di',
   template: `<app-child-di></app-child-di>`,
   providers: [UserService],
-  styleUrls: ['./app.component.scss'],
 })
 export class RootComponent {}
 
@@ -76,7 +75,6 @@ export class RootComponent {}
 @Component({
   selector: 'app-child-di',
   template: `<app-grand-child-di></app-grand-child-di>`,
-  styleUrls: ['./app.component.scss'],
 })
 export class ChildComponent {}
 
@@ -86,7 +84,6 @@ export class ChildComponent {}
 @Component({
   selector: 'app-grand-child-di',
   template: ``,
-  styleUrls: ['./app.component.scss'],
 })
 export class GrandChildComponent {
   constructor(private userService: UserService) {}
