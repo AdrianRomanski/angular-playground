@@ -10,7 +10,7 @@ export class ResolutionModifiersContainerComponent {
   /**
    * Self() - Looks only for provider in this component
    * Optional() - Optional dependency injection - without error if reach nullInjector
-   * Self() - Skipping Provider in this component
+   * SkipSelf() - Skipping Provider in this component
    */
   constructor(
     @Self() @Optional() private logger: LoggerService,
