@@ -12,6 +12,9 @@ import { DependencyProvidersComponent } from './dependency_providers/dependecy-p
 import { REPORTERS } from './multiple_providers/reporter.token';
 import { BrowserReporterService } from './multiple_providers/browser-reporter.service';
 import { EngagingReporterService } from './multiple_providers/engaging-reporter.service';
+import { GalleryComponent } from './view_providers/gallery/gallery.component';
+import { GallerySlideComponent } from './view_providers/gallery-slide/gallery-slide.component';
+import { GalleryContainerComponent } from './view_providers/gallery-container/gallery-container.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,16 @@ import { EngagingReporterService } from './multiple_providers/engaging-reporter.
     ChildDirective,
     ResolutionModifiersContainerComponent,
     DependencyProvidersComponent,
+    GalleryComponent,
+    GallerySlideComponent,
+    GalleryContainerComponent,
   ],
   imports: [CommonModule],
   exports: [
     ResolutionModifiersContainerComponent,
     DependencyProvidersComponent,
+    GalleryComponent,
+    GalleryContainerComponent,
   ],
   providers: [
     { provide: REPORTERS, useExisting: BrowserReporterService, multi: true },
