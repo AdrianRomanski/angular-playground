@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Logger } from './logger.interface';
-import { APP_CONFIG, AppConfig } from './app.config';
-import { HttpClient } from '@angular/common/http';
+import { REPORTERS } from '../multiple_providers/reporter.token';
+import { Reporter } from '../multiple_providers/reporter';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,10 @@ export class ExperimentalLoggerService implements Logger {
   //   console.log('ExperimentalLoggerService -> constructor -> config', config);
   // }
 
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(REPORTERS) private reporters: ReadonlyArray<Reporter>) {}
 
   log(message: string): void {
+    this.reporters.forEach((r) => r.report());
     console.log(`logging from ${this.prefix}`);
   }
 

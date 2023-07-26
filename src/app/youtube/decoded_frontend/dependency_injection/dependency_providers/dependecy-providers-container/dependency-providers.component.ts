@@ -1,9 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { LoggerService } from '../../resolution-modifiers/logger.service';
 import { ExperimentalLoggerService } from '../experimental-logger.service';
-import { LegacyLogger } from '../logger.legacy';
 import { APP_CONFIG, AppConfig } from '../app.config';
-import { HttpClient } from '@angular/common/http';
+
+import { Logger } from '../logger.interface';
+
+export function loggerFactory(injector: Injector): Logger {
+  return injector.get(APP_CONFIG).experimentalEnabled
+    ? injector.get(ExperimentalLoggerService)
+    : injector.get(LoggerService);
+}
 
 @Component({
   selector: 'app-dependency-providers',
@@ -31,23 +37,19 @@ import { HttpClient } from '@angular/common/http';
       /**
        * useFactory have dynamic nature
        */
-      useFactory: (config: AppConfig, http: HttpClient) => {
-        return config.experimentalEnabled
-          ? new ExperimentalLoggerService(http)
-          : new LoggerService();
-      },
-      deps: [APP_CONFIG, HttpClient],
+      useFactory: loggerFactory,
+      deps: [Injector],
     },
   ],
 })
 export class DependencyProvidersComponent implements OnInit {
   constructor(
-    private logger: LoggerService,
-  ) // private experimentalLogger: ExperimentalLoggerService,
-  {}
+    private logger: LoggerService, // private experimentalLogger: ExperimentalLoggerService,
+  ) {}
 
   ngOnInit(): void {
     this.logger.log('logger');
+
     // this.experimentalLogger.log('experimentalLogger');
     // console.log('are they same?', this.logger === this.experimentalLogger);
   }
