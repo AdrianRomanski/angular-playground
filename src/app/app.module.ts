@@ -10,6 +10,7 @@ import { IfLoadedDirective } from './youtube/decoded_frontend/custom_structural_
 import { DependencyInjectionModule } from './youtube/decoded_frontend/dependency_injection/dependency-injection.module';
 import { InjectContainerComponent } from './youtube/decoded_frontend/dependency_injection/inject/inject.container.component';
 import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/dependency_injection/providers_in_angular_route/providers-in-angular-route.module';
+import { AppInitializerModule } from './youtube/decoded_frontend/dependency_injection/app_initializer_token/app/app-initializer.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/depend
     DependencyInjectionModule,
     InjectContainerComponent,
     ProvidersInAngularRouteModule,
+    AppInitializerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
