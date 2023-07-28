@@ -8,6 +8,7 @@ import { StructuralDirectivesComponent } from './youtube/decoded_frontend/custom
 import { HideAfterDirective } from './youtube/decoded_frontend/custom_structural_directives/hide-after.directive';
 import { IfLoadedDirective } from './youtube/decoded_frontend/custom_structural_directives/if-loaded.directive';
 import { DependencyInjectionModule } from './youtube/decoded_frontend/dependency_injection/dependency-injection.module';
+import { InjectContainerComponent } from './youtube/decoded_frontend/dependency_injection/inject/inject.container.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DependencyInjectionModule } from './youtube/decoded_frontend/dependency
     AppRoutingModule,
     DeveloperGuidesTestingModule,
     DependencyInjectionModule,
+    InjectContainerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

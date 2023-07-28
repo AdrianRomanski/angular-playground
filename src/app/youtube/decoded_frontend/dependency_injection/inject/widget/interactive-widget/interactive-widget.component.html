@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title class="widget-title">{{title}}</mat-card-title>
+  <mat-card-content class="widget-content">
+    <mat-icon class="widget-icon assessment">assessment</mat-icon>
+    <div class="progress mat-captions">Done: (2) - In Pogress (5)</div>
+    <div class="widget-controls">
+      <button mat-button>Reload Data</button>
+      <button mat-stroked-button>Add new</button>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <span class="mat-caption">Next update after {{config.pollingInterval / 1000 }} seconds</span>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  max-width: 350px;
+  min-width: 200px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.widget-icon {
+  --icon-width: 40px;
+  font-size: var(--icon-width);
+  width: var(--icon-width);
+  height: var(--icon-width);
+}
+.widget-title {
+  font-weight: bold;
+}
+.widget-content {
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+mat-card-footer {
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
