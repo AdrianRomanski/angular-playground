@@ -11,6 +11,7 @@ import { DependencyInjectionModule } from './youtube/decoded_frontend/dependency
 import { InjectContainerComponent } from './youtube/decoded_frontend/dependency_injection/inject/inject.container.component';
 import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/dependency_injection/providers_in_angular_route/providers-in-angular-route.module';
 import { AppInitializerModule } from './youtube/decoded_frontend/dependency_injection/app_initializer_token/app/app-initializer.module';
+import { PerformanceModule } from './youtube/decoded_frontend/performance/performance.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AppInitializerModule } from './youtube/decoded_frontend/dependency_inje
     DependencyInjectionModule,
     InjectContainerComponent,
     ProvidersInAngularRouteModule,
-    AppInitializerModule,
+    // AppInitializerModule,
+    PerformanceModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
