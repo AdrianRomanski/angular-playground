@@ -6,7 +6,7 @@ import { GalleryLoggerService } from '../gallery-logger.service';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
   // only available for view, not for ng-content
-  viewProviders: [GalleryLoggerService],
+  // viewProviders: [GalleryLoggerService],
 })
 export class GalleryComponent implements OnInit {
   constructor(private logger: GalleryLoggerService) {}
