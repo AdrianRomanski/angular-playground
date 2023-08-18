@@ -12,6 +12,7 @@ import { InjectContainerComponent } from './youtube/decoded_frontend/dependency_
 import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/dependency_injection/providers_in_angular_route/providers-in-angular-route.module';
 import { AppInitializerModule } from './youtube/decoded_frontend/dependency_injection/app_initializer_token/app/app-initializer.module';
 import { PerformanceModule } from './youtube/decoded_frontend/performance/performance.module';
+import { StrengthPipe } from './youtube/leelanarasimha/unit_testing/strength.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PerformanceModule } from './youtube/decoded_frontend/performance/perfor
     StructuralDirectivesComponent,
     HideAfterDirective,
     IfLoadedDirective,
+    StrengthPipe,
   ],
   imports: [
     BrowserModule,
