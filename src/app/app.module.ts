@@ -10,7 +10,6 @@ import { IfLoadedDirective } from './youtube/decoded_frontend/custom_structural_
 import { DependencyInjectionModule } from './youtube/decoded_frontend/dependency_injection/dependency-injection.module';
 import { InjectContainerComponent } from './youtube/decoded_frontend/dependency_injection/inject/inject.container.component';
 import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/dependency_injection/providers_in_angular_route/providers-in-angular-route.module';
-import { AppInitializerModule } from './youtube/decoded_frontend/dependency_injection/app_initializer_token/app/app-initializer.module';
 import { PerformanceModule } from './youtube/decoded_frontend/performance/performance.module';
 import { StrengthPipe } from './youtube/leelanarasimha/unit_testing/strength.pipe';
 import { SingleResponsibilityComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/single-responsibility.component';
@@ -19,6 +18,14 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/widget/widget.component';
+import { OpenCloseComponent } from './youtube/decoded_frontend/design_patterns/solid/open-close/open-close.component';
+import {
+  VelocityContentComponent
+} from "./youtube/decoded_frontend/design_patterns/solid/open-close/widget/velocity-content.component";
+import {
+  WetherContentComponent
+} from "./youtube/decoded_frontend/design_patterns/solid/open-close/widget/wether-content.component";
+import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend.module";
 
 @NgModule({
   declarations: [
@@ -43,6 +50,7 @@ import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/soli
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    DecodedFrontendModule
   ],
   providers: [],
   bootstrap: [AppComponent],
