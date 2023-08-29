@@ -13,6 +13,12 @@ import { ProvidersInAngularRouteModule } from './youtube/decoded_frontend/depend
 import { AppInitializerModule } from './youtube/decoded_frontend/dependency_injection/app_initializer_token/app/app-initializer.module';
 import { PerformanceModule } from './youtube/decoded_frontend/performance/performance.module';
 import { StrengthPipe } from './youtube/leelanarasimha/unit_testing/strength.pipe';
+import { SingleResponsibilityComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/single-responsibility.component';
+import {MatDividerModule} from "@angular/material/divider";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,8 @@ import { StrengthPipe } from './youtube/leelanarasimha/unit_testing/strength.pip
     HideAfterDirective,
     IfLoadedDirective,
     StrengthPipe,
+    SingleResponsibilityComponent,
+    WidgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +39,10 @@ import { StrengthPipe } from './youtube/leelanarasimha/unit_testing/strength.pip
     ProvidersInAngularRouteModule,
     // AppInitializerModule,
     PerformanceModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
