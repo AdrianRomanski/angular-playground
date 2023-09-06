@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WidgetContent} from "../../interface-segregation-prinicple/widget-content";
 
 @Component({
   selector: 'app-velocity-content',
@@ -10,8 +11,6 @@ import { Component, OnInit } from '@angular/core';
     </section>`,
   styleUrls: ['./widget-content.scss'],
 })
-export class VelocityContentComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class VelocityContentComponent implements WidgetContent{
+  id: string = ''
 }
