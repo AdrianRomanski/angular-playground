@@ -8,6 +8,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
+import { BarbaraLiskovComponent } from './design_patterns/solid/barbara-liskov/barbara-liskov.component';
+import { WeatherContentComponent } from './design_patterns/solid/barbara-liskov/weather-content/weather-content.component';
 
 
 
@@ -16,7 +18,9 @@ import {MatIconModule} from "@angular/material/icon";
     OpenCloseComponent,
     VelocityContentComponent,
     WetherContentComponent,
-    WidgetComponent
+    WidgetComponent,
+    BarbaraLiskovComponent,
+    WeatherContentComponent
   ],
   imports: [
     CommonModule,
