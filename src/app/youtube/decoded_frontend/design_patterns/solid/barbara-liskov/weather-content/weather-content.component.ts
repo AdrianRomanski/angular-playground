@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ContentChild} from '@angular/core';
 import {Reloadable, WidgetContent} from "../../interface-segregation-prinicple/widget-content";
+import {RELOADABLE_CONTENT} from "../../dependency-inversion/widget-content.token";
 
 @Component({
   selector: 'app-weather-content',
@@ -13,5 +14,4 @@ export class WeatherContentComponent implements WidgetContent, Reloadable{
   reload(): void {
     console.log('do polling..')
   }
-
 }

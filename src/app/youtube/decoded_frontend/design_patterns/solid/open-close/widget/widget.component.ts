@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {AfterContentInit, Component, ContentChild, Input} from '@angular/core';
 import {WidgetBase} from "../../barbara-liskov/widget-base";
+import {RELOADABLE_CONTENT} from "../../dependency-inversion/widget-content.token";
+import {Reloadable} from "../../interface-segregation-prinicple/widget-content";
 
 @Component({
   selector: 'app-widget',
@@ -32,5 +34,13 @@ import {WidgetBase} from "../../barbara-liskov/widget-base";
     `,
   ],
 })
-export class WidgetComponent extends WidgetBase{
+export class WidgetComponent extends WidgetBase implements AfterContentInit{
+  @ContentChild(RELOADABLE_CONTENT)
+  content?: Reloadable;
+
+  ngAfterContentInit(): void {
+    if(this.content) {
+      this.content.reload();
+    }
+  }
 }
