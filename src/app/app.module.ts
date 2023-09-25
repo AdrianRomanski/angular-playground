@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DeveloperGuidesTestingModule } from './websites/angular/developer_guides/testing/app/developer-guides-testing.module';
 import { StructuralDirectivesComponent } from './youtube/decoded_frontend/custom_structural_directives/structural-directives/structural-directives.component';
 import { HideAfterDirective } from './youtube/decoded_frontend/custom_structural_directives/hide-after.directive';
 import { IfLoadedDirective } from './youtube/decoded_frontend/custom_structural_directives/if-loaded.directive';
@@ -18,13 +17,6 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/widget/widget.component';
-import { OpenCloseComponent } from './youtube/decoded_frontend/design_patterns/solid/open-close/open-close.component';
-import {
-  VelocityContentComponent
-} from "./youtube/decoded_frontend/design_patterns/solid/open-close/widget/velocity-content.component";
-import {
-  WetherContentComponent
-} from "./youtube/decoded_frontend/design_patterns/solid/open-close/widget/wether-content.component";
 import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend.module";
 
 @NgModule({
@@ -40,7 +32,6 @@ import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DeveloperGuidesTestingModule,
     DependencyInjectionModule,
     InjectContainerComponent,
     ProvidersInAngularRouteModule,
