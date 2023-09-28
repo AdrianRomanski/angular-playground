@@ -18,6 +18,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/solid/single-responsability/widget/widget.component';
 import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend.module";
+import {CdkComponent} from "./youtube/decoded_frontend/angular_material/cdk/cdk.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -29,20 +31,22 @@ import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend
     SingleResponsibilityComponent,
     WidgetComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    DependencyInjectionModule,
-    InjectContainerComponent,
-    ProvidersInAngularRouteModule,
-    // AppInitializerModule,
-    PerformanceModule,
-    MatDividerModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    DecodedFrontendModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        DependencyInjectionModule,
+        InjectContainerComponent,
+        ProvidersInAngularRouteModule,
+        // AppInitializerModule,
+        PerformanceModule,
+        MatDividerModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        DecodedFrontendModule,
+        CdkComponent
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
