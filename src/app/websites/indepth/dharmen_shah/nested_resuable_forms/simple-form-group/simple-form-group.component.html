@@ -1,0 +1,41 @@
+<!-- src/app/simple-form-group/simple-form-group.component.html -->
+
+<form [formGroup]="profileFormGroup">
+  <h2>Basic Information</h2>
+  <div>
+    <label for="name">Name*</label>
+    <input
+      type="text"
+      formControlName="name"
+      id="name"
+      required
+      [ngClass]="{
+        'is-invalid': nameFC?.invalid && (nameFC?.touched || nameFC?.dirty)
+      }"
+    />
+    <div class="invalid-feedback">Name is required</div>
+  </div>
+  <!-- other basic information fields -->
+  <div>
+    <h2>Address</h2>
+    <div>
+      <label for=line1>Line 1*</label>
+      <input
+        id="line1"
+        [name]="'line1'"
+        autocomplete="address-line1"
+        formControlName="line1"
+        required
+        type="text"
+        [ngClass]="{
+          'is-invalid': line1FC?.invalid && (line1FC?.touched || line1FC?.dirty)
+        }"
+      />
+      <div class="invalid-feedback">Address line 1 is required</div>
+    </div>
+    <!-- other address fields -->
+  </div>
+  <button type="submit" [disabled]="profileFormGroup.invalid">
+    Submit form
+  </button>
+</form>
