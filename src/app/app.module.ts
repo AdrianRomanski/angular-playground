@@ -20,6 +20,12 @@ import { WidgetComponent } from './youtube/decoded_frontend/design_patterns/soli
 import {DecodedFrontendModule} from "./youtube/decoded_frontend/decoded-frontend.module";
 import {CdkComponent} from "./youtube/decoded_frontend/angular_material/cdk/cdk.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { AddressFormComponent } from './websites/indepth/dharmen_shah/material-custom-form-field-control/address-form/address-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,24 +36,33 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     StrengthPipe,
     SingleResponsibilityComponent,
     WidgetComponent,
+    AddressFormComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        DependencyInjectionModule,
-        InjectContainerComponent,
-        ProvidersInAngularRouteModule,
-        // AppInitializerModule,
-        PerformanceModule,
-        MatDividerModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        DecodedFrontendModule,
-        CdkComponent
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    DependencyInjectionModule,
+    InjectContainerComponent,
+    ProvidersInAngularRouteModule,
+    // AppInitializerModule,
+    PerformanceModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    DecodedFrontendModule,
+    CdkComponent,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    AddressFormComponent
+  ]
 })
 export class AppModule {}
