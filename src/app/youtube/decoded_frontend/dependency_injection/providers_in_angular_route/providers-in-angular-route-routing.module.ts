@@ -7,11 +7,11 @@ const routes: Routes = [
     path: '',
     component: HomeContainerComponent,
   },
-  {
-    path: 'users',
-    loadChildren: () =>
-      import('./feature/users/users.module').then((m) => m.UsersModule),
-  },
+  // {
+  //   path: 'users',
+  //   loadChildren: () =>
+  //     import('./feature/users/users.module').then((m) => m.UsersModule),
+  // },
   {
     path: 'admin',
     loadComponent: () =>

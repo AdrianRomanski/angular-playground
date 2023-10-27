@@ -193,7 +193,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
   }
   set placeholder(value: string) {
     this._placeholder = value;
-    this.stateChanges.next();
+    this.stateChanges.next(undefined);
   }
   private _placeholder = '';
 
@@ -203,7 +203,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
   }
   set required(value: BooleanInput) {
     this._required = coerceBooleanProperty(value);
-    this.stateChanges.next('');
+    this.stateChanges.next(undefined);
   }
   private _required = false;
 
@@ -214,7 +214,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
   set disabled(value: BooleanInput) {
     this._disabled = coerceBooleanProperty(value);
     this._disabled ? this.addressForm.disable() : this.addressForm.enable();
-    this.stateChanges.next('');
+    this.stateChanges.next(undefined);
   }
   private _disabled = false;
 
@@ -258,7 +258,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
     // @ts-ignore
     this.addressForm.setValue(tel);
 
-    this.stateChanges.next('');
+    this.stateChanges.next(undefined);
   }
 
   get errorState(): boolean {
@@ -280,7 +280,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
   onFocusIn(event: FocusEvent) {
     if (!this.focused) {
       this.focused = true;
-      this.stateChanges.next('');
+      this.stateChanges.next(undefined);
     }
   }
 
@@ -291,7 +291,7 @@ export class AddressFormComponent  implements ControlValueAccessor, MatFormField
       this.touched = true;
       this.focused = false;
       this.onTouched();
-      this.stateChanges.next('');
+      this.stateChanges.next(undefined);
     }
   }
 
