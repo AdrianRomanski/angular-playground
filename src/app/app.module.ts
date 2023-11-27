@@ -27,6 +27,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CdkPortalModule} from "./youtube/decoded_frontend/angular_material/cdk/portal/cdk-portal.module";
+import {
+    ValueAccessorExampleComponent
+} from "./youtube/decoded_frontend/control_value_accessor/value-accessor-example/value-accessor-example.component";
+import {
+  DropDownSearchComponent
+} from "./youtube/decoded_frontend/angular_material/cdk/overlay/drop-down-search/drop-down-search.component";
 
 @NgModule({
   declarations: [
@@ -59,7 +65,9 @@ import {CdkPortalModule} from "./youtube/decoded_frontend/angular_material/cdk/p
     MatRadioModule,
     MatCardModule,
     ReactiveFormsModule,
-    CdkPortalModule
+    CdkPortalModule,
+    ValueAccessorExampleComponent,
+    DropDownSearchComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

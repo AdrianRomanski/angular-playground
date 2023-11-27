@@ -1,66 +1,75 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatIconModule} from "@angular/material/icon";
-import {MatInput, MatInputModule} from "@angular/material/input";
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { Observable, merge, iif, EMPTY } from 'rxjs';
+import {
+  map,
+  filter,
+  mapTo,
+  startWith,
+  switchMap,
+  delay,
+} from 'rxjs/operators';
+import {A11yModule, FocusMonitor} from '@angular/cdk/a11y';
+import {MatInput, MatInputModule} from '@angular/material/input';
 import {
   CdkConnectedOverlay,
-  CdkOverlayOrigin,
   ConnectedPosition,
-  OverlayModule, OverlayRef,
-  ScrollStrategy, ScrollStrategyOptions
-} from "@angular/cdk/overlay";
-import {MAT_SELECT_SCROLL_STRATEGY_PROVIDER} from "@angular/material/select";
-import {MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatSlideToggleChange, MatSlideToggleModule} from "@angular/material/slide-toggle";
+  ScrollStrategyOptions,
+  ScrollStrategy,
+  OverlayModule,
+} from '@angular/cdk/overlay';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatIconModule} from "@angular/material/icon";
+import {CommonModule} from "@angular/common";
 import {MatDividerModule} from "@angular/material/divider";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import { OverlayRef } from '@angular/cdk/overlay/';
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatButtonModule} from "@angular/material/button";
-import {MatDialogModule} from "@angular/material/dialog";
-import {delay, EMPTY, iif, mapTo, merge, Observable, startWith, switchMap} from "rxjs";
-import {FocusMonitor} from "@angular/cdk/a11y";
-import {filter, map} from "rxjs/operators";
-import {ESCAPE} from "@angular/cdk/keycodes";
 
 export interface State {
   flag: string;
   name: string;
   population: string;
 }
-
 @Component({
   selector: 'app-drop-down-search',
-  standalone: true,
+  templateUrl: './drop-down-search.component.html',
+  styleUrls: ['./drop-down-search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    OverlayModule,
+    A11yModule,
     MatSlideToggleModule,
     MatDividerModule,
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatAutocompleteModule,
-    MatDialogModule,
-    OverlayModule
   ],
-  providers: [
-   {
-    provide: MAT_AUTOCOMPLETE_SCROLL_STRATEGY,
-    useValue: MAT_SELECT_SCROLL_STRATEGY_PROVIDER,
-   },
-  ],
-  templateUrl: './drop-down-search.component.html',
-  styleUrls: ['./drop-down-search.component.scss']
+  standalone: true
 })
-export class DropDownSearchComponent implements OnInit{
+export class DropDownSearchComponent implements OnInit {
   showPanel$: Observable<boolean>;
 
   states: State[] = [
+    {
+      name: 'Vienna',
+      population: '1.897M',
+      flag:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Vienna.svg/800px-Flag_of_Vienna.svg.png',
+    },
     {
       name: 'Salzburg',
       population: '152.367K',
@@ -89,16 +98,17 @@ export class DropDownSearchComponent implements OnInit{
       originX: 'center',
       originY: 'bottom',
       overlayX: 'center',
-      overlayY: 'top'
+      overlayY: 'top',
+      offsetY: -21,
     },
     {
       originX: 'center',
-      originY: 'bottom',
+      originY: 'top',
       overlayX: 'center',
       overlayY: 'bottom',
-      panelClass: 'no-enough-space'
+      panelClass: 'no-enogh-space-at-bottom',
     },
-  ]
+  ];
 
   scrollStrategy: ScrollStrategy;
 
@@ -112,46 +122,38 @@ export class DropDownSearchComponent implements OnInit{
   private isPanelHidden$: Observable<boolean>;
   private isOverlayDetached$: Observable<void>;
 
-  constructor(private focusMonitor: FocusMonitor, private scrollStrategies: ScrollStrategyOptions) {}
+  constructor(
+    private focusMonitor: FocusMonitor,
+    private scrollStrategies: ScrollStrategyOptions
+  ) {}
 
   ngOnInit(): void {
-    // @ts-ignore
-    this.isPanelHidden$ = merge(
-      this.connectedOverlay.detach,
-      this.connectedOverlay.backdropClick.pipe(
-      mapTo(false)
-    ));
+    this.scrollStrategy = new ConfirmScrollStrategy(this.inputEl);
 
     this.isPanelVisible$ = this.focusMonitor.monitor(this.inputEl).pipe(
       filter((focused) => !!focused),
       mapTo(true)
     );
+    this.isOverlayDetached$ = this.isPanelVisible$.pipe(
+      delay(0),
+      switchMap(() =>
+        iif(
+          () => !!this.connectedOverlay.overlayRef,
+          this.connectedOverlay.overlayRef.detachments(),
+          EMPTY
+        )
+      )
+    );
+    this.isPanelHidden$ = merge(
+      this.isOverlayDetached$,
+      this.connectedOverlay.backdropClick
+    ).pipe(mapTo(false));
     this.showPanel$ = merge(this.isPanelHidden$, this.isPanelVisible$);
 
     this.filteredStates$ = this.stateCtrl.valueChanges.pipe(
       startWith(''),
       map((state) => (state ? this._filterStates(state) : this.states.slice()))
     );
-
-    this.isOverlayDetached$ = this.isPanelVisible$.pipe(
-      delay(0),
-      switchMap(() => iif(
-        () => !!this.connectedOverlay.overlayRef,
-        this.connectedOverlay.overlayRef.detachments(),
-        EMPTY
-      ))
-    )
-
-    // this.scrollStrategy = this.scrollStrategies.block();
-    // it does nothing
-    // this.scrollStrategy = this.scrollStrategies.noop();
-    // default
-    //  this.scrollStrategy = this.scrollStrategies.reposition();
-    // this.scrollStrategy = this.scrollStrategies.close({
-    //   threshold: 100,
-    // });
-
-    this.scrollStrategy = new ConfirmScrollStrategy(this.inputEl);
   }
 
   setCaseSensitive({ checked }: MatSlideToggleChange) {
@@ -174,27 +176,26 @@ export class DropDownSearchComponent implements OnInit{
 class ConfirmScrollStrategy implements ScrollStrategy {
   _overlay: OverlayRef;
 
-  constructor(private inputRef: ElementRef) {
+  constructor(private inputRef: ElementRef) {}
+
+  attach(overlayRef: OverlayRef) {
+    this._overlay = overlayRef;
   }
 
   enable() {
     document.addEventListener('scroll', this.scrollListener);
   }
 
-  attach(overlayRef: OverlayRef): void {
-    this._overlay = overlayRef;
-  }
-
-  disable(): void {
+  disable() {
     document.removeEventListener('scroll', this.scrollListener);
   }
 
   private scrollListener = () => {
-    if(confirm('The overlay will be closed. Proceed?')) {
+    if (confirm('The overlay will be closed. Procced?')) {
       this._overlay.detach();
       this.inputRef.nativeElement.blur();
       return;
     }
     this._overlay.updatePosition();
-  }
+  };
 }
